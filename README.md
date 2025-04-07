@@ -22,5 +22,4 @@ Este projeto recria o jogo Termo com interface visual usando a biblioteca `Pygam
 
 ## 🖥️ Preview
 
-### 👨‍👩‍💻 Preview do Jogo:
 ![Preview](assets/preview.png)
