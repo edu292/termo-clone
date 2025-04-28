@@ -22,4 +22,5 @@ Este projeto recria o jogo Termo com interface visual usando a biblioteca `Pygam
 
 ## 🖥️ Preview
 
-![Preview](assets/preview.png)
+![python_M6O99KLZoh](https://github.com/user-attachments/assets/95d08d78-3750-48d7-9ebe-420e31ccf57c)
+
