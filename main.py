@@ -1,4 +1,3 @@
-from sys import exit
 from random import choice
 from unidecode import unidecode
 import pygame
@@ -19,7 +18,7 @@ class PopUp:
         self.BACK_GROUND_COLOR = (0, 154, 254, 255)
         self.rect = pygame.Rect(self.x, self.y, screen_width, self.HEIGHT)
         self.FONT_SIZE = 20
-        self.font = pygame.font.Font(resource_path('../fonts/Mitr-Regular.ttf'), self.FONT_SIZE)
+        self.font = pygame.font.Font(resource_path('fonts/Mitr-Regular.ttf'), self.FONT_SIZE)
 
     def show(self, message):
         self.is_visible = True
@@ -45,7 +44,7 @@ class GameModeTAB:
         self.game_mode = self.game_modes[0]
         self.tab_rects = []
         self.FONT_SIZE = 30
-        self.font = pygame.font.Font(resource_path('../fonts/Mitr-Regular.ttf'), self.FONT_SIZE)
+        self.font = pygame.font.Font(resource_path('fonts/Mitr-Regular.ttf'), self.FONT_SIZE)
         self.BACK_GROUND_COLOR = (34, 34, 34, 255)
         self.SELECTED_COLOR = (72,72,73,255)
 
@@ -267,7 +266,7 @@ def resource_path(relative_path):
         # PyInstaller creates a temp folder and stores path in _MEIPASS
         base_path = sys._MEIPASS
     except Exception:
-        base_path = os.path.abspath("..")
+        base_path = os.path.abspath("")
 
     return os.path.join(base_path, relative_path)
 
@@ -284,10 +283,10 @@ WON_LAST_LINE_MESSAGES = ['Ufa!']
 
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-icon = pygame.image.load(resource_path('../icon.png'))
+icon = pygame.image.load(resource_path('icon.png'))
 pygame.display.set_icon(icon)
 clock = pygame.time.Clock()
-BOARD_FONT = pygame.font.Font(resource_path('../fonts/Mitr-Bold.ttf'), 40)
+BOARD_FONT = pygame.font.Font(resource_path('fonts/Mitr-Bold.ttf'), 40)
 
 with open('palavras.txt', 'r') as arquivo:
     word_bank = arquivo.read().splitlines()
@@ -297,12 +296,15 @@ game = Game("termo")
 game_mode_ui = GameModeTAB(SCREEN_WIDTH)
 popup = PopUp(SCREEN_WIDTH)
 
-while True:
+running = True
+while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            exit()
+            running = False
         elif event.type == pygame.KEYDOWN:
             popup.is_visible = False
+            if event.key == pygame.K_ESCAPE:
+                running = False
             if event.key == pygame.K_BACKSPACE:
                 game.back_space()
             elif event.key == pygame.K_RETURN:
@@ -332,3 +334,5 @@ while True:
 
     pygame.display.update()
     clock.tick(60)
+
+pygame.quit()
